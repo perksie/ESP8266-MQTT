@@ -54,13 +54,11 @@ bool DEBUG = true;		//Change to true to enable debugging
 //Stored data
 long currentPosition = 0;           //Current position of the blind
 long maxPosition = 20000;         //Max position of the blind
-boolean loadDataSuccess = false;
+//boolean loadDataSuccess = false;
 boolean saveItNow = false;          //If true will store positions to SPIFFS
 
 int path = 0;                       //Direction of blind (1 = down, 0 = stop, -1 = up)
 int setPos = 0;                     //The set position 0-100% by the client
-boolean loadDataSuccess = false;
-boolean saveItNow = false;          //If true will store positions to SPIFFS
 bool shouldSaveConfig = false;      //Used for WIFI Manager callback to save parameters
 boolean initLoop = true;            //To enable actions first time the loop is run
 boolean ccw = true;                 //Turns counter clockwise to lower the curtain
@@ -123,7 +121,7 @@ void loop() {
 			action = "";
 			int set = (setPos * 100) / maxPosition;
 			int pos = (currentPosition * 100) / maxPosition;
-			sendmsg(outputTopic, DEVICE_MONITOR_TOPIC + String(pos) );
+			sendmsg(DEVICE_MONITOR_TOPIC, String(pos) );
 			Serial.println("Stopped. Reached wanted position");
 			saveItNow = true;
 		}
@@ -287,7 +285,7 @@ void processMsg(String res, uint8_t clientnum) {
 		//Send position details to client
 		int set = (setPos * 100) / maxPosition;
 		int pos = (currentPosition * 100) / maxPosition;
-		sendmsg(outputTopic, DEVICE_MONITOR_TOPIC + String(pos));
+		sendmsg(DEVICE_MONITOR_TOPIC, String(pos));
 
 	}
 	else {
@@ -304,7 +302,7 @@ void processMsg(String res, uint8_t clientnum) {
 		int pos = (currentPosition * 100) / maxPosition;
 
 		//Send the instruction to all connected devices
-		sendmsg(outputTopic, DEVICE_MONITOR_TOPIC + String(pos));
+		sendmsg(DEVICE_MONITOR_TOPIC, String(pos));
 	}
 }
 
