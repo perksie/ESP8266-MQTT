@@ -79,6 +79,7 @@ void setup()
 
 	setup_wifi();
 	psclient.setServer(mqtt_server, mqtt_port);
+	psclient.setCallback(callback);
 	//Load config upon start
 	if (!SPIFFS.begin()) {
 		Serial.println("Failed to mount file system");
