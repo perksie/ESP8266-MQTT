@@ -78,7 +78,7 @@ void setup()
 	Serial.println("Starting Node: " SENSORNAME);
 
 	setup_wifi();
-
+	psclient.setServer(mqtt_server, mqtt_port);
 	//Load config upon start
 	if (!SPIFFS.begin()) {
 		Serial.println("Failed to mount file system");
