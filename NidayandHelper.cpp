@@ -65,43 +65,43 @@ void NidayandHelper::mqtt_reconnect(PubSubClient& psclient, String uid, String p
 	std::list<const char*> mylist;
 	return mqtt_reconnect(psclient, uid, pwd, mylist);
 }
-void NidayandHelper::mqtt_reconnect(PubSubClient& psclient, String uid, String pwd, std::list<const char*> topics) {
-	// Loop until we're reconnected
-	boolean mqttLogon = false;
-	if (uid != NULL and pwd != NULL) {
-		mqttLogon = true;
-	}
-	while (!psclient.connected()) {
-		Serial.print("Attempting MQTT connection...");
-		// Attempt to connect
-		if ((mqttLogon ? psclient.connect(this->_mqttclientid.c_str(), uid.c_str(), pwd.c_str()) : psclient.connect(this->_mqttclientid.c_str()))) {
-			Serial.println("connected");
-
-			//Send register MQTT message with JSON of chipid and ip-address
-			this->mqtt_publish(psclient, "/raw/esp8266/register", "{ \"id\": \"" + String(ESP.getChipId()) + "\", \"ip\":\"" + WiFi.localIP().toString() + "\"}");
-
-			//Setup subscription
-			if (!topics.empty()) {
-				for (const char* t : topics) {
-					psclient.subscribe(t);
-					Serial.println("Subscribed to " + String(t));
-				}
-			}
-
-		}
-		else {
-			Serial.print("failed, rc=");
-			Serial.print(psclient.state());
-			Serial.println(" try again in 5 seconds");
-			// Wait 5 seconds before retrying
-			ESP.wdtFeed();
-			delay(5000);
-		}
-	}
-	if (psclient.connected()) {
-		psclient.loop();
-	}
-}
+////void NidayandHelper::mqtt_reconnect(PubSubClient& psclient, String uid, String pwd, std::list<const char*> topics) {
+//	// Loop until we're reconnected
+//	boolean mqttLogon = false;
+//	if (uid != NULL and pwd != NULL) {
+//		mqttLogon = true;
+//	}
+//	while (!psclient.connected()) {
+//		Serial.print("Attempting MQTT connection...");
+//		// Attempt to connect
+//		if ((mqttLogon ? psclient.connect(this->_mqttclientid.c_str(), uid.c_str(), pwd.c_str()) : psclient.connect(this->_mqttclientid.c_str()))) {
+//			Serial.println("connected");
+//
+//			//Send register MQTT message with JSON of chipid and ip-address
+//			this->mqtt_publish(psclient, "/raw/esp8266/register", "{ \"id\": \"" + String(ESP.getChipId()) + "\", \"ip\":\"" + WiFi.localIP().toString() + "\"}");
+//
+//			//Setup subscription
+//			if (!topics.empty()) {
+//				for (const char* t : topics) {
+//					psclient.subscribe(t);
+//					Serial.println("Subscribed to " + String(t));
+//				}
+//			}
+//
+//		}
+//		else {
+//			Serial.print("failed, rc=");
+//			Serial.print(psclient.state());
+//			Serial.println(" try again in 5 seconds");
+//			// Wait 5 seconds before retrying
+//			ESP.wdtFeed();
+//			delay(5000);
+//		}
+//	}
+//	if (psclient.connected()) {
+//		psclient.loop();
+//	}
+//}
 
 void NidayandHelper::mqtt_publish(PubSubClient& psclient, String topic, String payload) {
 	Serial.println("Trying to send msg..." + topic + ":" + payload);
