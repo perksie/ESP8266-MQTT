@@ -289,6 +289,15 @@ void processMsg(String res, uint8_t clientnum) {
 		sendmsg(DEVICE_MONITOR_TOPIC, String(pos));
 
 	}
+	else if (res == "(start)") {
+		/*
+	   Store the current position as the start position
+	*/
+		currentPosition = 0;
+		path = 0;
+		saveItNow = true;
+		action = "manual";
+	}
 	else {
 		/*
 		   Any other message will take the blind to a position
