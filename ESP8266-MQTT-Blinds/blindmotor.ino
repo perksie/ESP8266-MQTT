@@ -86,7 +86,7 @@ void setup()
 		return;
 	}
 
-
+	CoilTest;
 
 }
 
@@ -192,6 +192,17 @@ void stopPowerToCoils() {
 	digitalWrite(D2, LOW);
 	digitalWrite(D3, LOW);
 	digitalWrite(D4, LOW);
+}
+
+void CoilTest() {
+	Serial.println("Testing coils...");
+	digitalWrite(D1, LOW);
+	digitalWrite(D2, LOW);
+	digitalWrite(D3, HIGH);
+	digitalWrite(D4, HIGH);
+	delay(1000);
+	stopPowerToCoils;
+
 }
 
 bool loadConfig() {
