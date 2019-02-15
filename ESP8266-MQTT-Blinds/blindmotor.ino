@@ -10,7 +10,7 @@
 #include <ESP8266mDNS.h>
 #include <WiFiUdp.h>
 #include <Stepper_28BYJ_48.h>
-#include <ArduinoJson/ArduinoJson.h>
+#include <ArduinoJson.h>
 #include <NidayandHelper.h>
 #include <FS.h>
 
@@ -196,10 +196,7 @@ void stopPowerToCoils() {
 
 void CoilTest() {
 	Serial.println("Testing coils...");
-	digitalWrite(D1, LOW);
-	digitalWrite(D2, LOW);
-	digitalWrite(D3, HIGH);
-	digitalWrite(D4, HIGH);
+	small_stepper.step(ccw ? -1 : 1);
 	delay(1000);
 	stopPowerToCoils;
 
