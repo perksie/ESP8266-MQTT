@@ -132,6 +132,7 @@ void loop() {
 		/*
 		   Manually running the blind
 		*/
+		Serial.println("Manually running blind...");
 		small_stepper.step(ccw ? path : -path);
 		currentPosition = currentPosition + path;
 	}
@@ -304,6 +305,9 @@ void processMsg(String res, uint8_t clientnum) {
 		currentPosition = 0;
 		path = 0;
 		saveItNow = true;
+		action = "manual";
+	}
+	else if (res == "(manual)") {
 		action = "manual";
 	}
 	else {
