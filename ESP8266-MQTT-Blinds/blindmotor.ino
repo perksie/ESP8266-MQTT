@@ -24,12 +24,12 @@ String version = "1.0";
 bool DEBUG = true;		//Change to true to enable debugging
 
 /*Wifi*/
-#define wifi_ssid				"WiFi_NAME"
-#define wifi_password			"WIFI_PASSWORD"
-#define mqtt_server				"MQTT_SERVER_ADDRESS"
+#define wifi_ssid				"guest"
+#define wifi_password			"netgear1"
+#define mqtt_server				"cragnet.duckdns.org"
 #define mqtt_port				1883
-#define mqtt_user				"MQTT_USERNAME"
-#define mqtt_password			"MQTT_PASSWORD"
+#define mqtt_user				"clayton"
+#define mqtt_password			"clayclay11"
 
 /*Would be best to use a unique device name as to not conflict with MQTT topics*/
 
@@ -68,7 +68,7 @@ String action;
 
 WiFiClient espClient;
 PubSubClient psclient(espClient);
-Stepper_28BYJ_48 small_stepper(D1, D3, D2, D4);
+Stepper_28BYJ_48 small_stepper(D1, D2, D3, D4);
 NidayandHelper helper = NidayandHelper();
 
 // The setup() function runs once each time the micro-controller starts
@@ -197,7 +197,7 @@ void stopPowerToCoils() {
 
 void CoilTest() {
 	Serial.println("Testing coils...");
-	small_stepper.step(ccw ? -1 : 1);
+	small_stepper.step(1);
 	delay(1000);
 	stopPowerToCoils;
 
