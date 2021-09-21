@@ -25,11 +25,11 @@ bool DEBUG = true;		//Change to true to enable debugging
 
 /*Wifi*/
 #define wifi_ssid				"guest"
-#define wifi_password			"netgear1"
-#define mqtt_server				"cragnet.duckdns.org"
+#define wifi_password				""
+#define mqtt_server				""
 #define mqtt_port				1883
-#define mqtt_user				"clayton"
-#define mqtt_password			"clayclay11"
+#define mqtt_user				""
+#define mqtt_password				""
 
 /*Would be best to use a unique device name as to not conflict with MQTT topics*/
 
